@@ -1,0 +1,7 @@
+.idea
+node_modules
+package
+build_tmp
+*.log
+/tsconfig.pack.json
+

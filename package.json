@@ -1,0 +1,19 @@
+{
+  "name": "express-promise-patch",
+  "version": "1.0.0",
+  "description": "Patch express application object with promise capabilities",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.12",
+    "build-utils": "^1.0.32",
+    "typescript": "^2.2.2"
+  },
+  "scripts": {
+    "pack": "bu pack",
+    "patch": "bu patch"
+  },
+  "author": "Ori Calvo",
+  "license": "ISC"
+}
