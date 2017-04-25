@@ -48,7 +48,7 @@ export async function patch() {
         cwd: "./package",
     });
 
-    await copyFile("../readme.md", "package/readme.md");
+    await copyFile("readme.md", "package/readme.md");
 
     await exec("npm publish", {
         cwd: "./package",

@@ -15,20 +15,37 @@ function writeContent(req, res, retVal) {
 function writeError(req, res, err) {
     let statusCode = 500;
     let statusMessage = err.message;
+    let errorCode = 1;
+    let errorMessage = err.message;
 
-    if (err instanceof HttpError) {
+    if("statusCode" in err) {
         statusCode = err.statusCode;
-        statusMessage = err.statusMessage || err.message;
+    }
+
+    if("statusMessage" in err) {
+        statusMessage = err.statusMessage;
+    }
+
+    if("errorCode" in err) {
+        errorCode = err.errorCode;
+    }
+
+    if("errorMessage" in err) {
+        errorMessage = err.errorMessage;
+    }
+
+    var json = {
+        errorCode: errorCode,
+        errorMessage: errorMessage,
+    };
+
+    if (!isProduction()) {
+        json["stack"] = err.stack.toString();
     }
 
     res.status(statusCode);
     res.statusMessage = statusMessage;
-
-    if (!isProduction()) {
-        res.write(err.stack.toString());
-    }
-
-    res.end();
+    res.json(json);
 }
 
 function handler(req, res, originalHandler) {
@@ -64,6 +81,8 @@ export function patch(app) {
             return original.apply(this, arguments);
         }
     }
+
+    return app;
 }
 
 export class HttpError extends Error {

@@ -4,4 +4,7 @@ package
 build_tmp
 *.log
 /tsconfig.pack.json
-
+build/*.js
+build/*.js.map
+src/*.js
+src/*.js.map
